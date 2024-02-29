@@ -1,0 +1,83 @@
+﻿@model ML.Hospital
+
+@{
+    ViewBag.Title = "Formulario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h1> REGISTRO DE HOSPITALES </h1>
+
+<br>
+
+@if (Model == null)
+{
+
+    <div class="alert alert-warning" role="alert">
+        Ocurrio Error!
+    </div>
+}
+else
+{
+    @using (Html.BeginForm("Formulario", "HospitalController1", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.IdHospital)
+
+
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Nombre)
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @onkeyup = "soloLetras(this,'lblNombre')" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Direccion)
+                @Html.TextBoxFor(model => model.Direccion, new { @class = "form-control", @onkeyup = "soloLetras(this,'lblApellidoPaterno')" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.AñoConstruccion)
+                @Html.TextBoxFor(model => model.AñoConstruccion, new { @class = "form-control", @onkeyup = "soloLetras(this,'lblApellidoMaterno')" })
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Capacidad)
+                @Html.TextBoxFor(model => model.Capacidad, new { @class = "form-control", @onkeyup = "soloLetras(this,'lblApellidoMaterno')" })
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Especialidad.IdEspecialidad)
+            @Html.DropDownListFor(model => model.Especialidad.IdEspecialidad, new SelectList(Model.Especialidad.Especialidades, "IdEspecialidad", "Especialidad"), "Selecciona una Especialidad", new { @class = "form-control" })
+        </div>
+
+        <br>
+        <br>
+
+        <div align='center'>
+            <div class="row">
+                @if (Model.IdHospital == 0)
+                {
+                    <input type="submit" class="btn btn-success" value="Agregar" />
+
+
+                }
+                else
+                {
+                    <input type="submit" class="btn btn-info" value="Actualizar" />
+
+
+                }
+
+                <a href="@Url.Action("GetAllHospital", "HospitalController1")" class="btn btn-danger">Cancelar</a>
+
+            </div>
+        </div>
+
+    }
+
+}

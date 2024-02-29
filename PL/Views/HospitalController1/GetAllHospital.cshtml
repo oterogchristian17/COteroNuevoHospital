@@ -1,0 +1,88 @@
+﻿@model ML.Hospital
+
+@{
+    ViewBag.Title = "GetAllHospital";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h1> LISTADO DE HOSPITALES </h1>
+
+<br>
+
+
+
+<div class="row">
+
+
+    @using (Html.BeginForm("GetAllHospital", "HospitalController1", FormMethod.Get, new { enctype = "multipart/form-data" }))
+    {
+       
+    }
+
+    <br>
+    <br>
+
+    <div class="col-md-3">
+        <a href="@Url.Action("Formulario", "HospitalController1")" class="btn btn-success"><i class="bi bi-building-add"></i></a>
+    </div>
+
+</div>
+<br>
+<br>
+
+@if (Model == null)
+{
+
+    <div class="alert alert-warning" role="alert">
+        Ocurrio Error!
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table align-middle table table-striped table-bordered" id="tabla">
+            <thead>
+                <tr>
+                    <th scope="col"> </th>
+                    <th scope="col"> </th>
+                    <th scope="col">Id_Hospital</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Año de Construccion</th>
+                    <th scope="col">Capacidad</th>
+                    <th scope="col">Id_Especialidad</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Hospital hospital in Model.Hospitales)
+                {
+                    <tr>
+
+                        <td> <a href="@Url.Action("Formulario", "HospitalController1", new {IdHospital = hospital.IdHospital })" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a> </td>
+                        <td>  <a href="@Url.Action("Delete", "HospitalController1",new {IdHospital = hospital.IdHospital })" class="btn btn-success"><i class="bi bi-trash3-fill"></i></a> </td>
+
+                        <td> @hospital.IdHospital</td>
+                        <td> @hospital.Nombre </td>
+                        <td>@hospital.Direccion</td>
+                        <td>@hospital.AñoConstruccion</td>
+                        <td>@hospital.Capacidad</td>
+                        <td> @hospital.Especialidad.IdEspecialidad</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.material.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script type="text/javascript">
+
+
+    <script/>
